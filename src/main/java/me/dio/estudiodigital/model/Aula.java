@@ -1,10 +1,8 @@
-package me.dio.estudiodigital.entity;
+package me.dio.estudiodigital.model;
 
 import lombok.Data;
 
-import java.sql.Array;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package me.dio.estudiodigital.entity;
+package me.dio.estudiodigital.model;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package me.dio.estudiodigital.entity;
+package me.dio.estudiodigital.model;
 
 import lombok.Data;
 
@@ -7,15 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Aluno {
+public class Instrutor {
     private long id;
     private String nome;
     private String email;
-    private int creditos;
     private LocalDate dataDeNascimento;
-    private Pacote pacote;
 
-    private List<Aula> aulasAgendadas = new ArrayList<>();
     private List<Aula> aulasHistorico = new ArrayList<>();
-    private List<Pacote> pacotesHistorico = new ArrayList<>();
+
+
 }
