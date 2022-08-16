@@ -17,7 +17,7 @@ public class AulaMapper {
     public AulaDTO aulaDTO(Aula aula){
         return MODEL_MAPPER.map(aula, AulaDTO.class);
     }
-    public List<AulaDTO> toAlunoDTOList(List<Aula> aulaList) {
+    public List<AulaDTO> toAulaDTOList(List<Aula> aulaList) {
         return aulaList.stream().map(this::aulaDTO).collect(Collectors.toList());
     }
 }

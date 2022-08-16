@@ -6,6 +6,7 @@ import me.dio.estudiodigital.controller.dto.AlunoDTO;
 import me.dio.estudiodigital.controller.mapper.AlunoMapper;
 import me.dio.estudiodigital.model.Aluno;
 import me.dio.estudiodigital.service.AlunoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,9 +26,9 @@ public class AlunoController {
     }
 
     @GetMapping
-    public List<AlunoDTO> findAll(){
+    public ResponseEntity<List<AlunoDTO>> findAll(){
         List<Aluno> alunoList = alunoService.findAll();
         List<AlunoDTO> result = alunoMapper.toAlunoDTOList(alunoList);
-        return result;
+        return ResponseEntity.ok(result);
     }
 }
