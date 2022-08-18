@@ -3,13 +3,16 @@ package me.dio.estudiodigital.controller;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import me.dio.estudiodigital.controller.dto.AlunoDTO;
+import me.dio.estudiodigital.controller.dto.AulaDTO;
 import me.dio.estudiodigital.controller.mapper.AlunoMapper;
 import me.dio.estudiodigital.model.Aluno;
+import me.dio.estudiodigital.model.Aula;
+import me.dio.estudiodigital.model.form.AlunoForm;
 import me.dio.estudiodigital.service.AlunoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,4 +34,25 @@ public class AlunoController {
         List<AlunoDTO> result = alunoMapper.toAlunoDTOList(alunoList);
         return ResponseEntity.ok(result);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AlunoDTO> findById(@PathVariable Long id){
+        Aluno aluno = alunoService.findById(id);
+        AlunoDTO result = alunoMapper.toAlunoDTO(aluno);
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping
+    @PreAuthorize("hasAnyRole{'USERS'}")
+    public ResponseEntity<AlunoDTO> create(@RequestBody AlunoDTO dto){
+        var alunoCreate = alunoMapper.toAluno(dto);
+        var aluno = alunoService.create(alunoCreate);
+        var result = alunoMapper.toAlunoDTO(aluno);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    }
+
+
+
+
+
 }

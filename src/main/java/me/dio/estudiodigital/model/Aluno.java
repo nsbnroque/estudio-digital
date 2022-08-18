@@ -21,7 +21,7 @@ public class Aluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String nome;
 
@@ -39,4 +39,7 @@ public class Aluno {
     @JsonIgnore
     private List<Aula> aulasAgendadas = new ArrayList<>();
 
+
+    public Aluno(String nome, String email, LocalDate dataDeNascimento) {
+    }
 }

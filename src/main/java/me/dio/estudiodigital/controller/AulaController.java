@@ -8,6 +8,7 @@ import me.dio.estudiodigital.model.Aula;
 import me.dio.estudiodigital.service.AulaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +31,13 @@ public class AulaController {
     public ResponseEntity<List<AulaDTO>> findAll(){
         List<Aula> aulaList = aulaService.findAll();
         List<AulaDTO> result = aulaMapper.toAulaDTOList(aulaList);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AulaDTO> findById(@PathVariable String id){
+        Aula aula = aulaService.findById(id);
+        AulaDTO result = aulaMapper.toAulaDTO(aula);
         return ResponseEntity.ok(result);
     }
 }

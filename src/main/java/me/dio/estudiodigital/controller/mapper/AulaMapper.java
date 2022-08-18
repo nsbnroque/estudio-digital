@@ -14,10 +14,11 @@ import java.util.stream.Collectors;
 public class AulaMapper {
     private static final ModelMapper MODEL_MAPPER = new ModelMapper();
 
-    public AulaDTO aulaDTO(Aula aula){
+    public AulaDTO toAulaDTO(Aula aula){
         return MODEL_MAPPER.map(aula, AulaDTO.class);
     }
     public List<AulaDTO> toAulaDTOList(List<Aula> aulaList) {
-        return aulaList.stream().map(this::aulaDTO).collect(Collectors.toList());
+        return aulaList.stream().map(this::toAulaDTO).collect(Collectors.toList());
     }
+
 }

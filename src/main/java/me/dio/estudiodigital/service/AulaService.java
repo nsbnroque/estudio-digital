@@ -19,4 +19,7 @@ public class AulaService {
     public List<Aula> findAll(){
         return aulaMap.values().stream().collect(Collectors.toList());
     }
+
+    public Aula findById(String id) { return aulaMap.get(id);
+    }
 }
