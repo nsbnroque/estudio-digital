@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import me.dio.estudiodigital.model.form.AlunoForm;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 @Entity
 @Table(name = "tb_alunos")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
@@ -25,7 +27,7 @@ public class Aluno {
 
     private String nome;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     private int creditos;
@@ -40,6 +42,5 @@ public class Aluno {
     private List<Aula> aulasAgendadas = new ArrayList<>();
 
 
-    public Aluno(String nome, String email, LocalDate dataDeNascimento) {
-    }
+
 }

@@ -8,6 +8,7 @@ import me.dio.estudiodigital.controller.mapper.AlunoMapper;
 import me.dio.estudiodigital.model.Aluno;
 import me.dio.estudiodigital.model.Aula;
 import me.dio.estudiodigital.model.form.AlunoForm;
+import me.dio.estudiodigital.model.form.AlunoUpdateForm;
 import me.dio.estudiodigital.service.AlunoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/alunos")
@@ -44,15 +46,23 @@ public class AlunoController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole{'USERS'}")
-    public ResponseEntity<AlunoDTO> create(@RequestBody AlunoDTO dto){
-        var alunoCreate = alunoMapper.toAluno(dto);
-        var aluno = alunoService.create(alunoCreate);
+    public ResponseEntity<AlunoDTO> create(@RequestBody AlunoForm form){
+        var aluno = alunoService.create(form);
         var result = alunoMapper.toAlunoDTO(aluno);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<AlunoDTO> update(@PathVariable Long id, @RequestBody AlunoUpdateForm form){
+        var aluno = alunoService.update(id, form);
+        var result = alunoMapper.toAlunoDTO(aluno);
+        return ResponseEntity.ok(result);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Long id){
+        alunoService.delete(id);
+        return ResponseEntity.noContent().build();
 
-
-
+    }
 
 }

@@ -7,10 +7,11 @@ import me.dio.estudiodigital.model.Pacote;
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AlunoDTO {
-    private long id;
+
+
+    private Long id;
     private String nome;
     private String email;
     private int creditos;

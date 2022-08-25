@@ -11,10 +11,10 @@ import java.util.List;
 public interface IAlunoService {
         /**
          * Cria um Aluno e salva no banco de dados.
-         * @param dto formulário referente aos dados para criação de um Aluno no banco de dados.
+         * @param form formulário referente aos dados para criação de um Aluno no banco de dados.
          * @return Aluno recém-criado.
          */
-        Aluno create(Aluno dto);
+        Aluno create(AlunoForm form);
 
         /**
          * Retorna um Aluno que está no banco de dados de acordo com seu Id.
