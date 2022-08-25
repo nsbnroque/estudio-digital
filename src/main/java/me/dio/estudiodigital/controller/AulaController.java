@@ -1,16 +1,15 @@
 package me.dio.estudiodigital.controller;
 
-import me.dio.estudiodigital.controller.dto.AlunoDTO;
 import me.dio.estudiodigital.controller.dto.AulaDTO;
 import me.dio.estudiodigital.controller.mapper.AulaMapper;
-import me.dio.estudiodigital.model.Aluno;
 import me.dio.estudiodigital.model.Aula;
+import me.dio.estudiodigital.model.form.AulaForm;
+import me.dio.estudiodigital.model.form.AulaUpdateForm;
 import me.dio.estudiodigital.service.AulaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,9 +34,30 @@ public class AulaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AulaDTO> findById(@PathVariable String id){
+    public ResponseEntity<AulaDTO> findById(@PathVariable Long id){
         Aula aula = aulaService.findById(id);
         AulaDTO result = aulaMapper.toAulaDTO(aula);
         return ResponseEntity.ok(result);
+    }
+
+    @PostMapping
+    @PreAuthorize("hasAnyRole{'USERS'}")
+    public ResponseEntity<AulaDTO> create(@RequestBody AulaForm form){
+        var aula = aulaService.create(form);
+        var result = aulaMapper.toAulaDTO(aula);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AulaDTO> update(@PathVariable Long id, @RequestBody AulaUpdateForm form){
+        var aluno = aulaService.update(id, form);
+        var result = aulaMapper.toAulaDTO(aluno);
+        return ResponseEntity.ok(result);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Long id){
+        aulaService.delete(id);
+        return ResponseEntity.noContent().build();
+
     }
 }

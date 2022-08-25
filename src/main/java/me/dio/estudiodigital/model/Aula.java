@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,12 +20,16 @@ import java.util.List;
 public class Aula {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
+
+    private String nome;
 
     private LocalDate data;
 
-    private LocalTime horarioInicio;
-    private LocalTime horarioFinal;
+    private TemporalAmount duracao;
+
+    private LocalDateTime horarioInicio;
+    private LocalDateTime horarioFinal= getHorarioInicio().plus(duracao);
 
     @ManyToOne
     @JoinColumn(name = "instrutor_id")
